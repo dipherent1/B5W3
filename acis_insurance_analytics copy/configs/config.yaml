@@ -1,0 +1,40 @@
+# Global configuration
+paths:
+  raw_csv: data/raw/claims.csv
+  intermediate_dir: data/intermediate
+  processed_dir: data/processed
+  reports_dir: reports
+  figures_dir: reports/figures
+  models_dir: models
+
+columns:
+  date: TransactionMonth
+  target_total_claims: TotalClaims
+  target_total_premium: TotalPremium
+  geo_province: Province
+  geo_zip: PostalCode
+  gender: Gender
+  vehicle_type: VehicleType
+
+premium_framework:
+  expense_loading: 0.10   # 10% of risk cost
+  profit_margin: 0.05     # 5% of risk cost
+
+modeling:
+  test_size: 0.2
+  random_state: 42
+  numeric_impute_strategy: median
+  categorical_impute_strategy: most_frequent
+
+features:
+  # Example sets for owner, car, location; extend as needed
+  owner: [IsVATRegistered, Citizenship, LegalType, Title, Language, Bank, AccountType, MaritalStatus, Gender]
+  location: [Country, Province, PostalCode, MainCrestaZone, SubCrestaZone]
+  car: [ItemType, Mmcode, VehicleType, RegistrationYear, Make, Model, Cylinders, Cubiccapacity, Kilowatts,
+        Bodytype, NumberOfDoors, VehicleIntroDate, CustomValueEstimate, AlarmImmobiliser, TrackingDevice,
+        CapitalOutstanding, NewVehicle, WrittenOff, Rebuilt, Converted, CrossBorder, NumberOfVehiclesInFleet]
+  plan: [SumInsured, TermFrequency, CalculatedPremiumPerTerm, ExcessSelected, CoverCategory, CoverType,
+         CoverGroup, Section, Product, StatutoryClass, StatutoryRiskType]
+
+plots:
+  creative_figures: true

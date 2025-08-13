@@ -1,0 +1,31 @@
+stages:
+  eda:
+    cmd: python -m src.eda.eda --config configs/config.yaml
+    deps:
+      - src/eda/eda.py
+      - configs/config.yaml
+      - data/raw/claims.csv
+    outs:
+      - reports/figures
+
+  features:
+    cmd: python -m src.features.preprocess --config configs/config.yaml
+    deps:
+      - src/features/preprocess.py
+      - configs/config.yaml
+      - data/raw/claims.csv
+    outs:
+      - data/processed/features.parquet
+
+  models:
+    cmd: python -m src.models.train_all --config configs/config.yaml
+    deps:
+      - src/models/train_all.py
+      - src/models/claim_severity.py
+      - src/models/claim_probability.py
+      - src/models/premium_model.py
+      - data/processed/features.parquet
+      - configs/config.yaml
+    outs:
+      - models
+      - reports/hypothesis_report.json

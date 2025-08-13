@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.env
+
+# Data & models
+data/raw/*
+!data/raw/.gitkeep
+data/intermediate/*
+data/processed/*
+models/*
+reports/*
+!reports/.gitkeep
+!reports/figures/.gitkeep
+
+# DVC
+/.dvc/cache/
+/dvc.lock
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
